@@ -3,7 +3,6 @@ package cn.glieen.servlet;
 import cn.glieen.annotation.*;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +36,7 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         Object result = null;
@@ -71,7 +70,11 @@ public class DispatcherServlet extends HttpServlet {
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        response.getWriter().write(result.toString());
+        if (result == null) {
+            response.getWriter().write("null");
+        } else {
+            response.getWriter().write(result.toString());
+        }
     }
 
     private void scanPackage(String baseScanPackage) {
@@ -162,9 +165,5 @@ public class DispatcherServlet extends HttpServlet {
                 }
             }
         }
-    }
-
-    public void doService(HttpServletRequest request, HttpServletResponse response) {
-
     }
 }
