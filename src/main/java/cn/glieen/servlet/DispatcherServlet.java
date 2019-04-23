@@ -32,7 +32,7 @@ public class DispatcherServlet extends HttpServlet {
         createBeans();
         autowired();
         requestAndMethodMapping();
-        System.out.println("GlieenMVC Is Running.");
+        System.out.println("MVC Is Running.");
     }
 
     @Override
